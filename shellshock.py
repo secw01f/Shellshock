@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import getopt
 import sys
+from lib import vulncheck, exploit
 
 URL = ''
 Check = False
@@ -50,3 +51,16 @@ def main():
             Exploit = True
         elif o in ('-l', '--listener'):
             Listener = a
+
+    if Check == True:
+        vulncheck.VulnCheck.urlcheck(URL, Listener)
+    else:
+        pass
+    
+    if Exploit == True:
+        exploit.Exploit.listener(Listener)
+        exploit.Exploit.exploit(URL, Listener)
+    else:
+        pass
+    
+main()
